@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: erimler-product-update-services
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: Sas231198__
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+messages: Erimler Product Services v1
+

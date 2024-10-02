@@ -1,0 +1,5 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+messages : Erimler Product Service v1 Active Production Mode
