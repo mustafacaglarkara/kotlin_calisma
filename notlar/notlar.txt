@@ -1,0 +1,3 @@
+HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+HikariPool-1 - Start completed.
+H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'

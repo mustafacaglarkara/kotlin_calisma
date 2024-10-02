@@ -1,7 +1,7 @@
 package com.erimler.product_service.dto
 
 
-data class ProdutcDTO(
+data class ProductDTO(
     val id:Int?,
     val productCode:String,
     val productName:String,

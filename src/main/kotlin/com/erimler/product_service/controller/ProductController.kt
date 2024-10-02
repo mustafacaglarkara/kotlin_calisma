@@ -1,11 +1,11 @@
 package com.erimler.product_service.controller
 
+import com.erimler.product_service.dto.ProductDTO
+import com.erimler.product_service.entity.Product
 import com.erimler.product_service.service.ProductService
 import mu.KLogging
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -16,11 +16,12 @@ class ProductController(val productService: ProductService) {
     //lateinit var productService: ProductService
 
     @GetMapping("")
-    fun product_index():Any{
+    fun product_index():MutableIterable<ProductDTO>{
+        var products = productService.getAllProducts()
         logger.info {
             "Product Index Logging..."
         }
-        return productService.product_index()
+        return products
     }
 
     @GetMapping("/{stock_code}")
@@ -29,6 +30,12 @@ class ProductController(val productService: ProductService) {
             "Product GetByProductByStockCode Logging..."
         }
         return productService.getProductByStockCode(stock_code)
+    }
+
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addProduct(@RequestBody productDTO: ProductDTO): ProductDTO {
+        return productService.addProduct(productDTO)
     }
 
 }

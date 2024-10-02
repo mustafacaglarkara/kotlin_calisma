@@ -2,4 +2,16 @@ spring:
   config:
     activate:
       on-profile: prod
+  datasource:
+    url: jdbc:h2:file:./data/testdb  # "file" moduyla H2'yi diskte saklar
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: Sas231198__
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      generate-ddl: true
+      show-sql: true
+    h2:
+      console:
+        enabled: true  # H2 konsoluna erişim sağlar
 messages : Erimler Product Service v1 Active Production Mode
