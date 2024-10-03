@@ -1,14 +1,16 @@
 package com.erimler.product_service.controller
 
 import com.erimler.product_service.dto.ProductDTO
-import com.erimler.product_service.entity.Product
 import com.erimler.product_service.service.ProductService
+import jakarta.validation.Valid
 import mu.KLogging
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/product")
+@Validated
 class ProductController(val productService: ProductService) {
 
     companion object :KLogging()
@@ -53,14 +55,19 @@ class ProductController(val productService: ProductService) {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    fun addProduct(@RequestBody productDTO: ProductDTO): ProductDTO {
+    fun addProduct(@RequestBody @Valid productDTO: ProductDTO): ProductDTO {
         return productService.addProduct(productDTO)
     }
 
     @PutMapping("/{productId}")
     @ResponseStatus(HttpStatus.OK)
-    fun updateProduct(@RequestBody productDTO: ProductDTO, @PathVariable("productId") productId:Int):ProductDTO{
+    fun updateProduct(@RequestBody @Valid productDTO: ProductDTO, @PathVariable("productId") productId:Int):ProductDTO{
         return productService.updateProduct(productId, productDTO)
+    }
+    @DeleteMapping("/{productId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteProduct(@PathVariable("productId") productId: Int):Any{
+        return productService.deleteProduct(productId)
     }
 
 }

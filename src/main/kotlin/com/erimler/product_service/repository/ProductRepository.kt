@@ -11,6 +11,7 @@ import java.util.*
 @Repository
 interface ProductRepository:CrudRepository<Product,Int> {
     fun findByProductCode(productCode:String): Optional<Product>
+    fun findByProductNameContaining(productName: String): List<Product>
 //    @Modifying
 //    @Query("UPDATE Product p SET p.productCode = :productCode, p.productName = :productName, p.productCategory = :productCategory WHERE p.id = :id")
 //    fun updateById(

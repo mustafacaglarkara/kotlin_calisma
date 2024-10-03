@@ -70,7 +70,7 @@ class ProductService(
         // Let Kullanımı Önemli Eğer Dolu ise let kullanılır.
         var tmpProduct = productDTO.let {
             Product(
-                null,it.productCode,it.productName,it.productCode
+                null, productCode = it.productCode, productName = it.productName, productCategory = it.productCategory
             )
         }
 //        var tmpProduct = Product(
@@ -84,7 +84,7 @@ class ProductService(
 
         return tmpProduct.let {
             ProductDTO(
-                it.id,it.productCategory,it.productName,it.productCategory
+                it.id,it.productCode,it.productName,it.productCategory
             )
         }
     }
@@ -102,5 +102,14 @@ class ProductService(
             throw ProductNotFoundException("Girilen $productId Id'ye göre Ürün Bulunamadı")
         }
     }
-
+    fun deleteProduct(productId:Int) {
+        var tmpProduct = productRepository.findById(productId)
+        if(tmpProduct.isPresent){
+            tmpProduct.get().let {
+                productRepository.delete(it)
+            }
+        }else{
+            throw ProductNotFoundException("Girilen $productId Id'ye göre Ürün Bulunamadı")
+        }
+    }
 }
